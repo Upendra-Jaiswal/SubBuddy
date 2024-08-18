@@ -1,29 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL; // Access the environment variable
 
-      const response = await fetch(`${backendUrl}/signup`, {
+      const response = await fetch(`${backendUrl}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, name }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const result = await response.json();
-        console.log("User signed up:", result);
-        // Redirect or handle success
+        console.log("User signed in:", result);
+        localStorage.setItem("token", result.token);
+        navigate("/layout"); // Redirect to layout page after sign-in
       } else {
         const errorData = await response.json();
         setError(errorData.message || "An error occurred");
@@ -37,22 +38,9 @@ const SignUp = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-100">
       <div className="w-full max-w-md p-8 bg-gray-800 shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+        <h2 className="text-2xl font-bold mb-4">Sign In</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-black sm:text-sm"
-              required
-            />
-          </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium">
               Email
@@ -62,7 +50,7 @@ const SignUp = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-black sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
           </div>
@@ -83,13 +71,13 @@ const SignUp = () => {
             type="submit"
             className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Sign Up
+            Sign In
           </button>
         </form>
         <p className="mt-4 text-center">
-          Already have an account?{" "}
-          <Link to="/signin" className="text-blue-400 hover:underline">
-            Sign In
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-blue-400 hover:underline">
+            Sign Up
           </Link>
         </p>
       </div>
@@ -97,4 +85,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
