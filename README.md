@@ -1,4 +1,3 @@
-Here’s the updated description with **SubBuddy**:
 
 ---
 
