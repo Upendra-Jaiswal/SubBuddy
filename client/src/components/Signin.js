@@ -10,9 +10,9 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL; // Access the environment variable
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-      const response = await fetch(`${backendUrl}/signin`, {
+      const response = await fetch(`${backendUrl}/api/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

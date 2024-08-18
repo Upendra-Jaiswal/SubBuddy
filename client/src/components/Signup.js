@@ -10,16 +10,21 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    console.log(backendUrl);
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL; // Access the environment variable
+      // const backendUrl = process.env.REACT_APP_BACKEND_URL; // Access the environment variable
 
-      const response = await fetch(`${backendUrl}/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password, name }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password, name }),
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
