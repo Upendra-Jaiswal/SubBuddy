@@ -1,9 +1,10 @@
+Here’s the updated description with **SubBuddy**:
 
 ---
 
-# Subshare
+# SubBuddy
 
-Subshare is an innovative platform where users can share subscriptions. Whether it's streaming services, software licenses, or any other type of subscription, Subshare makes it easy to connect and share with others.
+SubBuddy is an innovative platform where users can share subscriptions. Whether it's streaming services, software licenses, or any other type of subscription, SubBuddy makes it easy to connect and share with others.
 
 ## 🚧 Project Status
 
@@ -11,7 +12,7 @@ This project is currently in progress. We are actively building new features and
 
 ## 🌐 Live Demo
 
-Check out the live version of the app here: [Subshare on Vercel](https://sub-share-eosin.vercel.app)
+Check out the live version of the app here: [SubBuddy on Vercel](https://sub-share-eosin.vercel.app)
 
 ## 💡 Features
 
@@ -32,7 +33,7 @@ Check out the live version of the app here: [Subshare on Vercel](https://sub-sha
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/subshare.git
+   git clone https://github.com/yourusername/subbuddy.git
    ```
 
 2. Install dependencies:
@@ -49,12 +50,8 @@ Check out the live version of the app here: [Subshare on Vercel](https://sub-sha
 
 ---
 
-
-
----
-
 ## 📜 Note
 
-Thank you for checking out Subshare! We are excited about the potential of this platform to transform how people share and manage subscriptions. Your feedback and contributions are invaluable as we continue to enhance and expand the project. Stay tuned for updates, and don't hesitate to reach out with any questions or suggestions. Happy sharing!
+Thank you for checking out SubBuddy! We are excited about the potential of this platform to transform how people share and manage subscriptions. Your feedback and contributions are invaluable as we continue to enhance and expand the project. Stay tuned for updates, and don't hesitate to reach out with any questions or suggestions. Happy sharing!
 
 ---
