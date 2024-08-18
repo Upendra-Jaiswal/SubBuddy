@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL; // Access the environment variable
 
       const response = await fetch(`${backendUrl}/signup`, {
         method: "POST",
@@ -23,7 +24,7 @@ const SignUp = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("User signed up:", result);
-        // Redirect or handle success
+        navigate("/signin"); // Redirect to sign-in page after successful registration
       } else {
         const errorData = await response.json();
         setError(errorData.message || "An error occurred");
