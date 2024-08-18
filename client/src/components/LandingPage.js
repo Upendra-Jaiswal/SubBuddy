@@ -1,11 +1,22 @@
 import React from "react";
+
 const LandingPage = () => {
   return (
     <div>
+      {/* Caution Banner */}
+      <section className="bg-yellow-800 text-yellow-200 py-4">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-lg font-semibold">
+            ⚠️ Caution: This app is currently in progress. Some features may be
+            incomplete or not fully functional.
+          </p>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white">
         <div className="container mx-auto px-6 py-20 text-center">
-          <h1 className="text-5xl font-bold mb-4">Welcome to SubShare</h1>
+          <h1 className="text-5xl font-bold mb-4">Welcome to SubBuddy</h1>
           <p className="text-lg mb-8">
             Effortlessly manage and share your subscriptions with friends and
             family. Take control of your subscriptions today.
@@ -23,7 +34,7 @@ const LandingPage = () => {
       <section className="py-20 bg-gray-100">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-12">
-            Why Choose SubShare?
+            Why Choose SubBuddy?
           </h2>
           <div className="flex flex-wrap justify-center">
             <div className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8">
@@ -81,7 +92,7 @@ const LandingPage = () => {
                   Save Money
                 </h3>
                 <p className="text-gray-600">
-                  Cut costs by splitting subscription fees. SubShare helps you
+                  Cut costs by splitting subscription fees. SubBuddy helps you
                   make the most out of your subscriptions.
                 </p>
               </div>
@@ -126,7 +137,7 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-6">
         <div className="container mx-auto px-6 text-center">
-          <p>&copy; 2024 SubShare. All rights reserved.</p>
+          <p>&copy; 2024 SubBuddy. All rights reserved.</p>
           <p className="mt-2">
             <a href="/privacy" className="text-gray-400 hover:underline">
               Privacy Policy
