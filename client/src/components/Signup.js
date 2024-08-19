@@ -10,25 +10,20 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    console.log(backendUrl);
-    try {
-      // const backendUrl = process.env.REACT_APP_BACKEND_URL; // Access the environment variable
 
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/signup`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password, name }),
-        }
-      );
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, name }),
+      });
 
       if (response.ok) {
-        const result = await response.json();
-        console.log("User signed up:", result);
+        // const result = await response.json();
+        // console.log("User signed up:", result);
         navigate("/signin"); // Redirect to sign-in page after successful registration
       } else {
         const errorData = await response.json();

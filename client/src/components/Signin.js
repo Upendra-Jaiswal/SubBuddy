@@ -7,6 +7,9 @@ const SignIn = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Hook for navigation
 
+  const getenvurl = () => {
+    console.log(process.env.REACT_APP_BACKEND_URL);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -22,9 +25,9 @@ const SignIn = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("User signed in:", result);
+        //console.log("User signed in:", result);
         localStorage.setItem("token", result.token);
-        navigate("/layout"); // Redirect to layout page after sign-in
+        navigate("/subscriptionspage"); // Redirect to layout page after sign-in
       } else {
         const errorData = await response.json();
         setError(errorData.message || "An error occurred");
@@ -80,6 +83,9 @@ const SignIn = () => {
             Sign Up
           </Link>
         </p>
+        <button className=" px-4 py-2" onClick={getenvurl}>
+          getenvurl
+        </button>
       </div>
     </div>
   );
