@@ -1,9 +1,13 @@
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",  // Include your source files
+    "./src/**/*.{js,jsx,ts,tsx}", // Include your source files
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        cursive: ["Dancing Script", "cursive"], // Add the cursive font
+      },
+    },
   },
   plugins: [],
 };

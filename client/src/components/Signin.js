@@ -27,7 +27,7 @@ const SignIn = () => {
         const result = await response.json();
         //console.log("User signed in:", result);
         localStorage.setItem("token", result.token);
-        navigate("/subscriptionspage"); // Redirect to layout page after sign-in
+        navigate("/homepage"); // Redirect to layout page after sign-in
       } else {
         const errorData = await response.json();
         setError(errorData.message || "An error occurred");
