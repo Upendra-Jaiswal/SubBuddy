@@ -22,6 +22,20 @@ const SignUp = () => {
       });
 
       if (response.ok) {
+        const result = await response.json();
+        // console.log("User signed up:", result);
+        //  console.log("User signed up:", result.user._id);
+        //  console.log("User signed up:", result.user);
+        // if (typeof result === "object") {
+        //   console.log("its object"); // If result is an object
+        // }
+
+        // Assuming the response includes a user ID
+        const userId = result.user._id;
+        // Store user ID in local storage or state management
+        localStorage.setItem("userId", userId);
+        // console.log("userId", userId);
+
         // const result = await response.json();
         // console.log("User signed up:", result);
         navigate("/signin"); // Redirect to sign-in page after successful registration

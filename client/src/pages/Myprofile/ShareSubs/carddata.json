@@ -1,24 +1,16 @@
-{
-  "YouTube Premium": {
+[
+  {
+    "serviceName": "YouTube Premium",
     "id": 1,
     "name": "YouTube",
     "total_users_worldwide": "2.5 billion users worldwide",
     "image": "/src/assets/youtubelogo.avif",
-    "users": [
-      {
-        "id": 2,
-        "name": "Bob Smith"
-      },
-      {
-        "id": 6,
-        "name": "Fiona Martinez"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "YouTube Premium Family",
         "price": "$21.99/month",
-        "description": "Add up to 5 family members (aged 13+) in your household. Free-of-charge trial for eligible new members only. "
+        "description": "Add up to 5 family members (aged 13+) in your household. Free-of-charge trial for eligible new members only."
       },
       {
         "name": "YouTube Premium",
@@ -27,25 +19,13 @@
       }
     ]
   },
-  "Netflix": {
+  {
+    "serviceName": "Netflix",
     "id": 2,
     "name": "Netflix",
     "total_users_worldwide": "238 million users worldwide",
     "image": "/src/assets/netflixlogo.jpeg",
-    "users": [
-      {
-        "id": 1,
-        "name": "Alice Johnson"
-      },
-      {
-        "id": 4,
-        "name": "Diana Brown"
-      },
-      {
-        "id": 8,
-        "name": "Hannah Lewis"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Basic",
@@ -64,21 +44,13 @@
       }
     ]
   },
-  "Prime Video": {
+  {
+    "serviceName": "Prime Video",
     "id": 3,
     "name": "Prime Video",
     "total_users_worldwide": "200 million users worldwide",
     "image": "/src/assets/Amazon-Prime-Video-logo.jpg.webp",
-    "users": [
-      {
-        "id": 1,
-        "name": "Alice Johnson"
-      },
-      {
-        "id": 5,
-        "name": "Ethan Lee"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Amazon Prime Membership",
@@ -87,25 +59,13 @@
       }
     ]
   },
-  "Disney+": {
+  {
+    "serviceName": "Disney+",
     "id": 4,
     "name": "Disney+",
     "total_users_worldwide": "161.8 million users worldwide",
     "image": "/src/assets/Disney__Logo_March_2024.png.jpeg",
-    "users": [
-      {
-        "id": 2,
-        "name": "Bob Smith"
-      },
-      {
-        "id": 4,
-        "name": "Diana Brown"
-      },
-      {
-        "id": 7,
-        "name": "George Wilson"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Disney+ Basic",
@@ -119,21 +79,13 @@
       }
     ]
   },
-  "Hulu": {
+  {
+    "serviceName": "Hulu",
     "id": 5,
     "name": "Hulu",
     "total_users_worldwide": "48 million users worldwide",
     "image": "/src/assets/hulu.png",
-    "users": [
-      {
-        "id": 2,
-        "name": "Bob Smith"
-      },
-      {
-        "id": 5,
-        "name": "Ethan Lee"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Hulu with Ads",
@@ -152,21 +104,13 @@
       }
     ]
   },
-  "HBO Max": {
+  {
+    "serviceName": "HBO Max",
     "id": 6,
     "name": "HBO Max",
     "total_users_worldwide": "76.8 million users worldwide",
     "image": "/src/assets/new-hbo-max-logo-design.jpg",
-    "users": [
-      {
-        "id": 3,
-        "name": "Charlie Davis"
-      },
-      {
-        "id": 6,
-        "name": "Fiona Martinez"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "HBO Max Ad-Lite",
@@ -180,21 +124,13 @@
       }
     ]
   },
-  "Apple TV+": {
+  {
+    "serviceName": "Apple TV+",
     "id": 7,
     "name": "Apple TV+",
     "total_users_worldwide": "40 million users worldwide",
     "image": "/src/assets/02-apple-tv-app-2019.jpg.webp",
-    "users": [
-      {
-        "id": 3,
-        "name": "Charlie Davis"
-      },
-      {
-        "id": 6,
-        "name": "Fiona Martinez"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Apple TV+",
@@ -203,21 +139,13 @@
       }
     ]
   },
-  "Peacock": {
+  {
+    "serviceName": "Peacock",
     "id": 8,
     "name": "Peacock",
     "total_users_worldwide": "20 million users worldwide",
     "image": "/src/assets/peacock.jpeg",
-    "users": [
-      {
-        "id": 7,
-        "name": "George Wilson"
-      },
-      {
-        "id": 4,
-        "name": "Diana Brown"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Peacock Free",
@@ -236,21 +164,13 @@
       }
     ]
   },
-  "Paramount+": {
+  {
+    "serviceName": "Paramount+",
     "id": 9,
     "name": "Paramount+",
     "total_users_worldwide": "43 million users worldwide",
     "image": "/src/assets/paramountplus.webp",
-    "users": [
-      {
-        "id": 4,
-        "name": "Diana Brown"
-      },
-      {
-        "id": 8,
-        "name": "Hannah Lewis"
-      }
-    ],
+    "users": [],
     "plans": [
       {
         "name": "Paramount+ Essential",
@@ -264,4 +184,4 @@
       }
     ]
   }
-}
+]

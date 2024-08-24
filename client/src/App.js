@@ -8,6 +8,8 @@ import SubscriptionsPage from "./components/SubscriptionsPage";
 import HomePage from "./pages/HomePage";
 import MyProfile from "./pages/Myprofile/Myprofile";
 import Sharesubs from "./pages/Myprofile/ShareSubs/Sharesub";
+import Users from "./pages/Users/Users";
+import Chat from "./pages/Chat/Chat";
 // index.js or App.js
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -22,6 +24,8 @@ const App = () => {
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/sharemyubs" element={<Sharesubs />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </Router>
   );

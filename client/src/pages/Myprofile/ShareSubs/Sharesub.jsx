@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import axios from "axios"; // Import axios for HTTP requests
 import carddatafile from "./carddata.json";
 import correctimage from "./depositphotos_12880120-stock-photo-green-check-mark.jpg";
+import { useUser } from "../../../contexts/UserContext";
+
 const Sharesubs = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [plans, setPlans] = useState([]);
   const [submitted, setSubmitted] = useState(false); // State to manage submission status
+
+  //const { userId } = useContext(useUser); // Assuming userId is provided by UserContext
 
   // Create an array of options for the select input
   const options = Object.values(carddatafile).map((carddata) => (
@@ -47,9 +52,40 @@ const Sharesubs = () => {
     : "";
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
+
+    // Find the selected subscription details
+    const selectedSubscription = Object.values(carddatafile).find(
+      (carddata) => carddata.id === parseInt(selectedOption)
+    );
+
+    if (selectedSubscription) {
+      const subscriptionData = {
+        serviceName: selectedSubscription.serviceName,
+        id: selectedSubscription._id,
+
+        plans: selectedSubscription.plans,
+
+        startDate,
+        endDate,
+        // user: userId,
+        // Optionally include other data as needed
+      };
+
+      try {
+        // Send data to the backend
+        await axios.post("/api/sharesub", subscriptionData);
+
+        // Set submitted status to true after successful submission
+        setSubmitted(true);
+      } catch (error) {
+        console.error("Failed to submit subscription", error);
+        // Handle error accordingly
+      }
+    }
+  };
+  const dummySubmit = () => {
     setSubmitted(true);
   };
 
@@ -63,8 +99,15 @@ const Sharesubs = () => {
               className="correct-image"
               alt="Order Placed"
             />
-            <p className="text-gray-800 text-lg">
+            <p className="text-gray-800 text-lg mb-4">
               Your subscription has been shared!
+            </p>
+            <p className="text-gray-600 text-md">
+              This feature is currently under development. Please stay tuned for
+              updates!
+            </p>
+            <p className="text-gray-500 text-sm mt-4">
+              Note: This is a dummy submission for development purposes.
             </p>
           </div>
         </div>
@@ -73,7 +116,7 @@ const Sharesubs = () => {
           <h2 className="text-2xl font-bold mb-4 text-gray-800">
             Create Subscription
           </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={dummySubmit} className="space-y-4">
             <div>
               <label
                 htmlFor="subscription"

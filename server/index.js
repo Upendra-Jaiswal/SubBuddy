@@ -15,10 +15,9 @@ app.use(cors());
 // Connect to MongoDB
 connectDB(); // Establish connection to the database
 
-
 app.use(
   cors({
-    origin: ['http://localhost:3000'], 
+    origin: ["http://localhost:3000"],
     methods: ["POST", "GET"],
     credentials: true,
   })

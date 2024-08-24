@@ -1,0 +1,70 @@
+[
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "subscriptions": [
+        "Netflix",
+        "Prime Video"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "subscriptions": [
+        "YouTube",
+        "Disney+",
+        "Hulu"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Charlie Davis",
+      "subscriptions": [
+        "HBO Max",
+        "Apple TV+"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Diana Brown",
+      "subscriptions": [
+        "Netflix",
+        "Disney+",
+        "Paramount+"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Ethan Lee",
+      "subscriptions": [
+        "Prime Video",
+        "Hulu"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Fiona Martinez",
+      "subscriptions": [
+        "YouTube",
+        "HBO Max",
+        "Apple TV+"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "George Wilson",
+      "subscriptions": [
+        "Disney+",
+        "Peacock"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Hannah Lewis",
+      "subscriptions": [
+        "Netflix",
+        "Paramount+"
+      ]
+    }
+  ]
+  
