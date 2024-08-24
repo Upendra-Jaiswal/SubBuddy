@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db"); // Import the DB connection function
 const userRoutes = require("./routes/authRoutes");
+const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const cors = require("cors");
 require("dotenv").config(); // Load environment variables
 
@@ -14,8 +15,19 @@ app.use(cors());
 // Connect to MongoDB
 connectDB(); // Establish connection to the database
 
+
+app.use(
+  cors({
+    origin: ['http://localhost:3000'], 
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+
 // Use authentication routes
 app.use("/api", userRoutes);
+
+app.use("/api", subscriptionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

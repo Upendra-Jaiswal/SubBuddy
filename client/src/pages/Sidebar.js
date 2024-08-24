@@ -1,7 +1,12 @@
 // src/components/Sidebar.js
 import React from "react";
-
+import { Link, useNavigate } from "react-router-dom";
 const Sidebar = ({ onClose }) => {
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate("/myprofile"); // Redirect to the profile page
+  };
   return (
     <div className="fixed inset-0 flex justify-end items-start z-50">
       <div className="bg-gradient-to-r from-teal-400 to-blue-500 w-64 h-[25vh] p-4 shadow-lg relative">
@@ -28,7 +33,7 @@ const Sidebar = ({ onClose }) => {
           <ul className="space-y-4 w-full text-center">
             <li
               className="py-2 px-4 bg-gray-800 rounded hover:bg-gray-700 cursor-pointer transition duration-300"
-              onClick={() => console.log("My Profile")}
+              onClick={handleProfileClick}
             >
               My Profile
             </li>

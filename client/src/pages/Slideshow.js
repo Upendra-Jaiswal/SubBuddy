@@ -7,7 +7,7 @@ const slides = [
     text: "Now you can share your subscription and save money.",
     image: sharecommunity,
   },
-  { text: "or yopu could buy from here .", image: sharecommunity },
+  { text: "or you can buy from here .", image: sharecommunity },
   {
     text: "See all your bought and shared subscriptions in the My Profile section.",
     image: sharecommunity,
@@ -22,7 +22,7 @@ const Slideshow = () => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(nextSlide, 5000);
+    const intervalId = setInterval(nextSlide, 2000);
 
     return () => clearInterval(intervalId);
   }, []);
