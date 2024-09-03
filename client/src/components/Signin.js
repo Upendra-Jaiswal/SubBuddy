@@ -25,8 +25,11 @@ const SignIn = () => {
 
       if (response.ok) {
         const result = await response.json();
-        //console.log("User signed in:", result);
+        console.log("User signed in:", result);
         localStorage.setItem("token", result.token);
+        localStorage.setItem("userID", result.user._id);
+        // const userID = localStorage.getItem("userID");
+        // console.log("userid is ", userID);
         navigate("/homepage"); // Redirect to layout page after sign-in
       } else {
         const errorData = await response.json();

@@ -1,7 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/db"); // Import the DB connection function
-const userRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes");
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
+const userRoutes = require("./routes/userRoutes.js");
 const cors = require("cors");
 require("dotenv").config(); // Load environment variables
 
@@ -24,9 +25,11 @@ app.use(
 );
 
 // Use authentication routes
-app.use("/api", userRoutes);
+app.use("/api", authRoutes);
 
 app.use("/api", subscriptionRoutes);
+
+app.use("/api", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

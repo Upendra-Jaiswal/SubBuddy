@@ -1,193 +1,127 @@
-import { useState, useContext } from "react";
-import axios from "axios"; // Import axios for HTTP requests
+import React, { useState } from "react";
+import SubscriptionSelect from "./SubscriptionSelect";
+import PlanSelect from "./PlanSelect";
+import DateInput from "./DateInput";
+import SubmissionSuccess from "./Submissionsuccess";
 import carddatafile from "./carddata.json";
-import correctimage from "./depositphotos_12880120-stock-photo-green-check-mark.jpg";
-import { useUser } from "../../../contexts/UserContext";
 
 const Sharesubs = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [plans, setPlans] = useState([]);
-  const [submitted, setSubmitted] = useState(false); // State to manage submission status
+  const [serviceName, setServiceName] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("");
+  const [planFromCard, setPlanFromCard] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
 
-  //const { userId } = useContext(useUser); // Assuming userId is provided by UserContext
+  const token = localStorage.getItem("token");
 
-  // Create an array of options for the select input
   const options = Object.values(carddatafile).map((carddata) => (
-    <option key={carddata.id} value={carddata.id}>
-      {carddata.name}
+    <option key={carddata.id} value={carddata.serviceName}>
+      {carddata.serviceName}
     </option>
   ));
 
-  // Handle subscription selection and update plans
   const handleSubscriptionChange = (e) => {
-    const selectedId = e.target.value;
-    setSelectedOption(selectedId);
+    const selectedServiceName = e.target.value;
+    setServiceName(selectedServiceName);
 
-    // Find the selected subscription and update plans
     const selectedSubscription = Object.values(carddatafile).find(
-      (carddata) => carddata.id === parseInt(selectedId)
+      (carddata) => carddata.serviceName === selectedServiceName
     );
-    setPlans(selectedSubscription ? selectedSubscription.plans : []);
+    setPlanFromCard(selectedSubscription ? selectedSubscription.plans : []);
+    setSelectedPlan(""); // Reset selected plan when subscription changes
   };
+
+  const handlePlanChange = (e) => setSelectedPlan(e.target.value);
 
   const handleStartDateChange = (e) => {
     const newStartDate = e.target.value;
     setStartDate(newStartDate);
-
-    // Update the minimum allowed date for the end date field
-    if (endDate && newStartDate > endDate) {
-      setEndDate(""); // Clear end date if it's less than the new start date
-    }
+    if (endDate && newStartDate > endDate) setEndDate("");
   };
 
-  const handleEndDateChange = (e) => {
-    setEndDate(e.target.value);
-  };
+  const handleEndDateChange = (e) => setEndDate(e.target.value);
 
-  // Calculate min end date based on start date
   const minEndDate = startDate
     ? new Date(startDate).toISOString().split("T")[0]
     : "";
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Find the selected subscription details
+    if (!serviceName || !startDate || !endDate || !selectedPlan) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
     const selectedSubscription = Object.values(carddatafile).find(
-      (carddata) => carddata.id === parseInt(selectedOption)
+      (carddata) => carddata.serviceName === serviceName
     );
 
     if (selectedSubscription) {
       const subscriptionData = {
-        serviceName: selectedSubscription.serviceName,
-        id: selectedSubscription._id,
-
-        plans: selectedSubscription.plans,
-
+        serviceName,
+        plans: selectedPlan,
         startDate,
         endDate,
-        // user: userId,
-        // Optionally include other data as needed
       };
 
+      console.log("Data being sent to backend:", subscriptionData);
       try {
-        // Send data to the backend
-        await axios.post("/api/sharesub", subscriptionData);
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/sharesub`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(subscriptionData),
+          }
+        );
 
-        // Set submitted status to true after successful submission
-        setSubmitted(true);
+        if (response.ok) {
+          setSubmitted(true);
+        } else {
+          console.log("Error");
+        }
       } catch (error) {
         console.error("Failed to submit subscription", error);
-        // Handle error accordingly
       }
     }
-  };
-  const dummySubmit = () => {
-    setSubmitted(true);
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       {submitted ? (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
-            <img
-              src={correctimage}
-              className="correct-image"
-              alt="Order Placed"
-            />
-            <p className="text-gray-800 text-lg mb-4">
-              Your subscription has been shared!
-            </p>
-            <p className="text-gray-600 text-md">
-              This feature is currently under development. Please stay tuned for
-              updates!
-            </p>
-            <p className="text-gray-500 text-sm mt-4">
-              Note: This is a dummy submission for development purposes.
-            </p>
-          </div>
-        </div>
+        <SubmissionSuccess />
       ) : (
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">
             Create Subscription
           </h2>
-          <form onSubmit={dummySubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="subscription"
-                className="block text-gray-700 font-medium mb-1"
-              >
-                Select your subscription
-              </label>
-              <select
-                id="subscription"
-                className="w-full border border-gray-300 rounded-md p-2"
-                value={selectedOption}
-                onChange={handleSubscriptionChange}
-              >
-                <option value="">-- Select an option --</option>
-                {options}
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="plan"
-                className="block text-gray-700 font-medium mb-1"
-              >
-                Select your plan
-              </label>
-              <select
-                id="plan"
-                className="w-full border border-gray-300 rounded-md p-2"
-              >
-                <option value="">-- Select a plan --</option>
-                {plans.map((plan) => (
-                  <option key={plan.name} value={plan.name}>
-                    {plan.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="start-date"
-                className="block text-gray-700 font-medium mb-1"
-              >
-                Start Date
-              </label>
-              <input
-                type="date"
-                id="start-date"
-                value={startDate}
-                onChange={handleStartDateChange}
-                className="w-full border border-gray-300 rounded-md p-2"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="end-date"
-                className="block text-gray-700 font-medium mb-1"
-              >
-                End Date
-              </label>
-              <input
-                type="date"
-                id="end-date"
-                value={endDate}
-                onChange={handleEndDateChange}
-                min={minEndDate} // Set minimum allowed date based on start date
-                className="w-full border border-gray-300 rounded-md p-2"
-              />
-            </div>
-
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <SubscriptionSelect
+              serviceName={serviceName}
+              options={options}
+              onChange={handleSubscriptionChange}
+            />
+            <PlanSelect
+              selectedPlan={selectedPlan}
+              plans={planFromCard}
+              onChange={handlePlanChange}
+            />
+            <DateInput
+              id="start-date"
+              value={startDate}
+              onChange={handleStartDateChange}
+            />
+            <DateInput
+              id="end-date"
+              value={endDate}
+              onChange={handleEndDateChange}
+              min={minEndDate}
+            />
             <button
               type="submit"
               className="w-full bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
