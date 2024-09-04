@@ -4,7 +4,9 @@ require("dotenv").config(); // Load environment variables
 // const DB_URI =
 //   process.env.MONGODB_URI || "mongodb://localhost:27017/subsharemern"; // Default URI if not set in env
 
-const DB_URI = process.env.MONGODB_URI; // Default URI if not set in env
+//const DB_URI = process.env.MONGODB_URI; // Default URI if not set in env
+
+const DB_URI = process.env.MONGODB_URI_CLOUD;
 
 // Function to connect to MongoDB
 const connectDB = async () => {

@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage";
 import SubscriptionsPage from "./components/SubscriptionsPage";
 import HomePage from "./pages/HomePage";
 import MyProfile from "./pages/Myprofile/Myprofile";
+//import Sharesubs from "./pages/Myprofile/ShareSubs/Sharesub";
 import Sharesubs from "./pages/Myprofile/ShareSubs/Sharesub";
 import Users from "./pages/Users/Users";
 import Chat from "./pages/Chat/Chat";
@@ -47,7 +48,7 @@ const App = () => {
           <Route path="/subscriptions" element={<SubscriptionsPage />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/sharemyubs" element={<Sharesubs />} />
+          <Route path="/sharemysubs" element={<Sharesubs />} />
           <Route path="/seemysharedsubs" element={<Seemysharedsubs />} />
           <Route path="/users" element={<Users />} />
           <Route path="/chat" element={<Chat />} />

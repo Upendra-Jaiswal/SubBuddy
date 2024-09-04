@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SubscriptionSelect from "./SubscriptionSelect";
 import PlanSelect from "./PlanSelect";
 import DateInput from "./DateInput";
 import SubmissionSuccess from "./Submissionsuccess";
-import carddatafile from "./carddata.json";
+//import carddatafile from "./carddata.json";
+import axios from "axios";
 
 const Sharesubs = () => {
   const [startDate, setStartDate] = useState("");
@@ -12,8 +13,32 @@ const Sharesubs = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [planFromCard, setPlanFromCard] = useState([]);
   const [submitted, setSubmitted] = useState(false);
-
+  const [error, setError] = useState("");
   const token = localStorage.getItem("token");
+
+  const [carddatafile, setCardDataFromFile] = useState([]);
+
+  useEffect(() => {
+    const fetchSubscriptions = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Get JWT token from local storage
+        const response = await axios.get(
+          "http://localhost:3001/api/subscriptions",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Send JWT token in header
+            },
+          }
+        );
+        setCardDataFromFile(response.data);
+        console.log(response.data);
+      } catch (err) {
+        setError("Failed to fetch subscriptions");
+      }
+    };
+
+    fetchSubscriptions();
+  }, []);
 
   const options = Object.values(carddatafile).map((carddata) => (
     <option key={carddata.id} value={carddata.serviceName}>
