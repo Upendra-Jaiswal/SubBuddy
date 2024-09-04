@@ -25,7 +25,8 @@ const App = () => {
     // Replace with your authentication check logic
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/getusers");
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        const response = await axios.get(`${backendUrl}/api/getusers`);
         setUserId(response.data);
         console.log(response.data);
 

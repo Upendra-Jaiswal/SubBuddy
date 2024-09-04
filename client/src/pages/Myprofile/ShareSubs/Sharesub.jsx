@@ -22,14 +22,13 @@ const Sharesubs = () => {
     const fetchSubscriptions = async () => {
       try {
         const token = localStorage.getItem("token"); // Get JWT token from local storage
-        const response = await axios.get(
-          "http://localhost:3001/api/subscriptions",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Send JWT token in header
-            },
-          }
-        );
+
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        const response = await axios.get(`${backendUrl}/api/subscriptions`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send JWT token in header
+          },
+        });
         setCardDataFromFile(response.data);
         console.log(response.data);
       } catch (err) {
