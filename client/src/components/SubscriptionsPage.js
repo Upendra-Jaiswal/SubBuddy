@@ -11,14 +11,12 @@ const SubscriptionsPage = () => {
     const fetchSubscriptions = async () => {
       try {
         const token = localStorage.getItem("token"); // Get JWT token from local storage
-        const response = await axios.get(
-          "http://localhost:3001/api/subscriptions",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Send JWT token in header
-            },
-          }
-        );
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        const response = await axios.get(`${backendUrl}/api/subscriptions`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send JWT token in header
+          },
+        });
         setSubscriptions(response.data);
         console.log(response.data);
       } catch (err) {
@@ -30,7 +28,6 @@ const SubscriptionsPage = () => {
   }, []);
 
   return (
-
     <div className="flex flex-row flex-wrap justify-center bg-gray-100 p-4 gap-4">
       {subscriptions.length === 0 ? (
         <p className="text-gray-500">No subscriptions found.</p>
