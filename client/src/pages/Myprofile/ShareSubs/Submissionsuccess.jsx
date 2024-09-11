@@ -12,13 +12,7 @@ const SubmissionSuccess = () => (
       <p className="text-gray-800 text-lg mb-4">
         Your subscription has been shared!
       </p>
-      <p className="text-gray-600 text-md">
-        This feature is currently under development. Please stay tuned for
-        updates!
-      </p>
-      <p className="text-gray-500 text-sm mt-4">
-        Note: This is a dummy submission for development purposes.
-      </p>
+      
     </div>
   </div>
 );
