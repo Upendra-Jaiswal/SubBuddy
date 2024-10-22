@@ -84,63 +84,23 @@ const getUserSubscriptions = async (req, res) => {
 //Their name will be added to the list of users sharing that subscription.
 //post req
 
-// const shareSubscription = async (req, res) => {
-//   const { selectedSubscriptionId } = req.body;
-//   const userId = req.user._id;
-
-//   try {
-//     const subscription = await Subscription.findById(selectedSubscriptionId);
-//     if (!subscription) {
-//       return res.status(404).json({ message: "Subscription not found" });
-//     }
-
-//     // Add user to the usersSharing array in the Subscription
-//     subscription.usersSharing.push(userId);
-//     await subscription.save();
-
-//     // Add the subscription to the user's sharedSubscriptions
-//     const user = await User.findById(userId);
-//     user.sharedSubscriptions.push(selectedSubscriptionId);
-//     await user.save();
-
-//     res.status(200).json({ message: "Subscription shared successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: "Error sharing subscription" });
-//   }
-// };
-
 const shareSubscription = async (req, res) => {
-  const { selectedSubscriptionId, serviceName, plans, startDate, endDate } =
-    req.body; // Destructure req.body here
+  const { selectedSubscriptionId } = req.body;
   const userId = req.user._id;
 
-  console.log(userId);
   try {
     const subscription = await Subscription.findById(selectedSubscriptionId);
     if (!subscription) {
       return res.status(404).json({ message: "Subscription not found" });
     }
 
-    // Add user and subscription details to the subscription
-    subscription.usersSharing.push({
-      userId,
-      selectedSubscriptionId,
-      serviceName,
-      plans,
-      startDate,
-      endDate,
-    });
+    // Add user to the usersSharing array in the Subscription
+    subscription.usersSharing.push(userId);
     await subscription.save();
 
-    // Add the subscription and its details to the user’s sharedSubscriptions
+    // Add the subscription to the user's sharedSubscriptions
     const user = await User.findById(userId);
-    user.sharedSubscriptions.push({
-      selectedSubscriptionId,
-      serviceName,
-      plans,
-      startDate,
-      endDate,
-    });
+    user.sharedSubscriptions.push(selectedSubscriptionId);
     await user.save();
 
     res.status(200).json({ message: "Subscription shared successfully" });
@@ -148,6 +108,46 @@ const shareSubscription = async (req, res) => {
     res.status(500).json({ message: "Error sharing subscription" });
   }
 };
+
+// const shareSubscription = async (req, res) => {
+//   const { selectedSubscriptionId, serviceName, plans, startDate, endDate } =
+//     req.body; // Destructure req.body here
+//   const userId = req.user._id;
+
+//   console.log(userId);
+//   try {
+//     const subscription = await Subscription.findById(selectedSubscriptionId);
+//     if (!subscription) {
+//       return res.status(404).json({ message: "Subscription not found" });
+//     }
+
+//     // Add user and subscription details to the subscription
+//     subscription.usersSharing.push({
+//       userId,
+//       selectedSubscriptionId,
+//       serviceName,
+//       plans,
+//       startDate,
+//       endDate,
+//     });
+//     await subscription.save();
+
+//     // Add the subscription and its details to the user’s sharedSubscriptions
+//     const user = await User.findById(userId);
+//     user.sharedSubscriptions.push({
+//       selectedSubscriptionId,
+//       serviceName,
+//       plans,
+//       startDate,
+//       endDate,
+//     });
+//     await user.save();
+
+//     res.status(200).json({ message: "Subscription shared successfully" });
+//   } catch (error) {
+//     res.status(500).json({ message: "Error sharing subscription" });
+//   }
+// };
 
 module.exports = {
   subscriptions,
