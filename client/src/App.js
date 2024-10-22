@@ -16,6 +16,13 @@ import UserContext from "./contexts/UserContext";
 // index.js or App.js
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Seemysharedsubs from "./pages/Myprofile/ShareSubs/Seemysharedsub";
+import UsersSharingSubscription from "./UsersSharingSubscription";
+
+import AllSubscriptions from "./subscriptions/AllSubscriptions";
+import SubscriptionDetails from "./subscriptions/SubscriptionDetails";
+import UserSubscriptions from "./subscriptions/UserSubscriptions";
+import Subscribe from "./subscriptions/Subscribe";
+import ShareSubscription from "./subscriptions/ShareSubscription";
 
 const App = () => {
   const [userId, setUserId] = useState(null);
@@ -46,13 +53,23 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<LandingPage />} />
-          <Route path="/subscriptions" element={<SubscriptionsPage />} />
+          <Route path="/subscriptions2" element={<SubscriptionsPage />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/myprofile" element={<MyProfile />} />
-          <Route path="/sharemysubs" element={<Sharesubs />} />
+          {/* <Route path="/sharemysubs" element={<Sharesubs />} /> */}
+          <Route path="/sharemysubs" element={<ShareSubscription />} />
           <Route path="/seemysharedsubs" element={<Seemysharedsubs />} />
           <Route path="/users" element={<Users />} />
           <Route path="/chat" element={<Chat />} />
+          <Route
+            path="/usersSharingSubscription"
+            element={<UsersSharingSubscription />}
+          />
+          <Route path="/subscriptions" element={<AllSubscriptions />} />
+          <Route path="/subscriptions/:id" element={<SubscriptionDetails />} />
+          <Route path="/user-subscriptions" element={<UserSubscriptions />} />
+          <Route path="/subscribe" element={<Subscribe />} />
+          <Route path="/share-subscription" element={<ShareSubscription />} />
         </Routes>
       </Router>
     </UserContext.Provider>

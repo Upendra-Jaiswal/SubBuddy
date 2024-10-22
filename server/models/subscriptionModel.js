@@ -7,7 +7,7 @@ const subscriptionSchema = new Schema({
   name: { type: String, required: true },
   total_users_worldwide: { type: String },
   image: { type: String },
-  users: [{ type: Schema.Types.ObjectId, ref: "User" }], // References User model
+
   plans: [
     {
       name: { type: String, required: true },
@@ -15,6 +15,7 @@ const subscriptionSchema = new Schema({
       description: { type: String },
     },
   ],
+  usersSharing: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Subscription = mongoose.model("Subscription", subscriptionSchema);

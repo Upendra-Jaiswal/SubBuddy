@@ -3,15 +3,32 @@ const connectDB = require("./config/db"); // Import the DB connection function
 const authRoutes = require("./routes/authRoutes");
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const userRoutes = require("./routes/userRoutes.js");
+const authenticateToken = require("./middlewares/authMiddleware");
 const cors = require("cors");
 require("dotenv").config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3001; // Use environment variable for port or default to 3001
+const helmet = require("helmet");
 
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: [
+          "'self'",
+          "http://127.0.0.1:8000",
+          "ws://localhost:42877/",
+        ],
+      },
+    },
+  })
+);
 
 // Connect to MongoDB
 connectDB(); // Establish connection to the database

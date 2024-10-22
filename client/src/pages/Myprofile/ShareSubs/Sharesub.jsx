@@ -16,6 +16,9 @@ const Sharesubs = () => {
   const [error, setError] = useState("");
   const token = localStorage.getItem("token");
 
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [selectedSubscriptionId, setSelectedSubscriptionId] = useState("");
+
   const [carddatafile, setCardDataFromFile] = useState([]);
 
   useEffect(() => {
@@ -30,6 +33,7 @@ const Sharesubs = () => {
           },
         });
         setCardDataFromFile(response.data);
+        setSubscriptions(response.data);
         console.log(response.data);
       } catch (err) {
         setError("Failed to fetch subscriptions");
@@ -84,25 +88,32 @@ const Sharesubs = () => {
 
     if (selectedSubscription) {
       const subscriptionData = {
+        selectedSubscriptionId,
         serviceName,
         plans: selectedPlan,
         startDate,
         endDate,
       };
 
+      // const { selectedSubscriptionId, serviceName, plans, startDate, endDate } =
+      // req.body;
+
       console.log("Data being sent to backend:", subscriptionData);
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/sharesub`,
+          // `${process.env.REACT_APP_BACKEND_URL}/api/sharesub`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/sharesubscription`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(subscriptionData),
+            body: JSON.stringify(selectedSubscriptionId),
           }
         );
+
+        console.log(subscriptionData);
 
         if (response.ok) {
           setSubmitted(true);
@@ -125,6 +136,24 @@ const Sharesubs = () => {
             Create Subscription
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <h1>Share a Subscription</h1>
+              <label htmlFor="subscription-dropdown">
+                Select a Subscription:
+              </label>
+              <select
+                id="subscription-dropdown"
+                value={selectedSubscriptionId}
+                onChange={(e) => setSelectedSubscriptionId(e.target.value)}
+              >
+                <option value="">--Select Subscription--</option>
+                {subscriptions.map((subscription) => (
+                  <option key={subscription._id} value={subscription._id}>
+                    {subscription.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <SubscriptionSelect
               serviceName={serviceName}
               options={options}
