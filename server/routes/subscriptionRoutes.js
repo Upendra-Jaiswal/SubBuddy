@@ -5,6 +5,7 @@ const {
   subscribeToService,
   getUserSubscriptions,
   shareSubscription,
+  getSharedSubscriptions,
 } = require("../controllers/subscriptionController");
 
 const {
@@ -34,6 +35,12 @@ router.get("/my-subscriptions", getUserSubscriptions);
 
 // Share a subscription
 router.post("/sharesubscription", authenticateToken, shareSubscription);
+
+router.get(
+  "/getsharedsubscriptions",
+  authenticateToken,
+  getSharedSubscriptions
+);
 
 router.get("/");
 

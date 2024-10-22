@@ -1,12 +1,15 @@
 import React from "react";
 
 const Chat = () => {
+  const alertmessage = () => {
+    alert("hold on!! feature coming soon");
+  };
   return (
     <div className="flex justify-center items-center h-[93vh] bg-gray-200 p-4">
       <div className="w-full max-w-4xl h-[70vh] bg-white shadow-lg rounded-3xl overflow-hidden flex flex-col">
         {/* Chat Header */}
         <div className="bg-blue-600 text-white p-4 text-lg font-semibold">
-          Chat with User
+          Chat
         </div>
 
         {/* Chat Body */}
@@ -25,14 +28,18 @@ const Chat = () => {
         </div>
 
         {/* Chat Input */}
-        <div className="p-4 bg-white border-t border-gray-300 flex items-center shadow-md">
+        <div className="p-4 bg-white border-t border-gray-300  flex items-center shadow-md">
           <input
+            // onClick={alertmessage}
             type="text"
             placeholder="Type your message..."
             className="bg-gray-200 flex-grow p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button className="ml-4 bg-blue-600 text-white p-2 rounded-lg flex-shrink-0 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <i className="fa fa-send"></i>
+          <button
+            onClick={alertmessage}
+            className="ml-4 bg-blue-600 text-white p-2 rounded-lg flex-shrink-0 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <i className="fa fa-send">Send</i>
           </button>
         </div>
       </div>

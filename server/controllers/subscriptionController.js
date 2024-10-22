@@ -149,10 +149,38 @@ const shareSubscription = async (req, res) => {
 //   }
 // };
 
+
+
+
+const getSharedSubscriptions = async (req, res) => {
+  try {
+    // Use req.user from the authentication middleware
+    const user = await User.findById(req.user._id)
+      .populate("sharedSubscriptions")
+      .exec();
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Send back the shared subscriptions
+    res.status(200).json({
+      success: true,
+      sharedSubscriptions: user.sharedSubscriptions,
+    });
+  } catch (error) {
+    console.error("Error retrieving shared subscriptions:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+
 module.exports = {
   subscriptions,
   getSubscriptionById,
   subscribeToService,
   getUserSubscriptions,
   shareSubscription,
+  getSharedSubscriptions
 };

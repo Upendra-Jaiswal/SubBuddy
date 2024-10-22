@@ -1,6 +1,6 @@
 // src/pages/UsersSharingSubscription.js
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const UsersSharingSubscription = () => {
@@ -9,6 +9,9 @@ const UsersSharingSubscription = () => {
   const [subscription, setSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Hook for navigation
+
+  const amount = 1000;
 
   useEffect(() => {
     const fetchSubscription = async () => {
@@ -39,25 +42,35 @@ const UsersSharingSubscription = () => {
 
   return (
     <div className="container mx-auto p-4 ">
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">{subscription.name}</h1>
-      <h2 className="text-xl mb-2 text-gray-600 ">Users Sharing This Subscription:</h2>
+      <h1 className="text-2xl font-bold mb-4 text-gray-800">
+        {subscription.name}
+      </h1>
+      <h2 className="text-xl mb-2 text-gray-600 ">
+        Users Sharing This Subscription:
+      </h2>
       {subscription.usersSharing.length === 0 ? (
-        <p className="text-gray-500">No users are currently sharing this subscription.</p>
+        <p className="text-gray-500">
+          No users are currently sharing this subscription.
+        </p>
       ) : (
         <ul className="list-none">
           {subscription.usersSharing.map((user) => (
             <li key={user._id} className="mb-4 w-[500px]">
               <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-md border border-gray-200 hover:bg-gray-50">
                 {/* User Name */}
-                <div className="text-lg font-medium text-gray-800">{user.name}</div>
+                <div className="text-lg font-medium text-gray-800">
+                  {user.name}
+                </div>
 
                 {/* Pay and Chat buttons */}
                 <div className="flex space-x-4">
                   <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                    Pay
+                    <Link to="/payment" state={{ amount }}>
+                      Pay{" "}
+                    </Link>
                   </button>
                   <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                    Chat
+                    <Link to="/chat">Chat </Link>
                   </button>
                 </div>
               </div>

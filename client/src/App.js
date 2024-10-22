@@ -23,6 +23,8 @@ import SubscriptionDetails from "./subscriptions/SubscriptionDetails";
 import UserSubscriptions from "./subscriptions/UserSubscriptions";
 import Subscribe from "./subscriptions/Subscribe";
 import ShareSubscription from "./subscriptions/ShareSubscription";
+import SharedSubscriptionPage from "./subscriptions/SharedSubscriptionPage";
+import PaymentPage from "./PaymentPage";
 
 const App = () => {
   const [userId, setUserId] = useState(null);
@@ -58,13 +60,19 @@ const App = () => {
           <Route path="/myprofile" element={<MyProfile />} />
           {/* <Route path="/sharemysubs" element={<Sharesubs />} /> */}
           <Route path="/sharemysubs" element={<ShareSubscription />} />
-          <Route path="/seemysharedsubs" element={<Seemysharedsubs />} />
+          {/* <Route path="/seemysharedsubs" element={<Seemysharedsubs />} /> */}
+          <Route path="/seemysharedsubs" element={<SharedSubscriptionPage />} />
+
           <Route path="/users" element={<Users />} />
           <Route path="/chat" element={<Chat />} />
           <Route
             path="/usersSharingSubscription"
             element={<UsersSharingSubscription />}
           />
+
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/payment" element={<PaymentPage />} />
+
           <Route path="/subscriptions" element={<AllSubscriptions />} />
           <Route path="/subscriptions/:id" element={<SubscriptionDetails />} />
           <Route path="/user-subscriptions" element={<UserSubscriptions />} />
