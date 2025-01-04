@@ -23,7 +23,7 @@ const AllSubscriptions = () => {
 
   return (
     <div>
-      {error && <p>{error}</p>}
+      {/* {error && <p>{error}</p>}
       <div className="subscription-list">
         {subscriptions.map(subscription => (
           <div key={subscription._id}>
@@ -31,7 +31,7 @@ const AllSubscriptions = () => {
             <Link to={`/subscriptions/${subscription._id}`}>View Users Sharing</Link>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
