@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import animationimage from "./animationimage.gif";
+import loginanimation from "./loginanimation.gif";
+
+//import { AuthContext } from "../../../context/AuthContext"; // Import the AuthContext
+
+import { toast } from "react-toastify"; // Import toast for notifications
+import "react-toastify/dist/ReactToastify.css"; // Import the toast CSS
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -7,10 +14,6 @@ const SignIn = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Hook for navigation
 
-  const getenvurl = () => {
-    console.log(process.env.REACT_APP_BACKEND_URL);
-  };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,13 +46,23 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-100">
-      <div className="w-full max-w-md p-8 bg-gray-800 shadow-md rounded-lg">
-        <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+    <div className="flex items-center justify-center min-h-screen bg-white text-gray-100 flex-col-reverse sm:flex-row">
+      <div className="w-full max-w-md p-8 bg-white-800 shadow-xl rounded-lg flex flex-col space-y-6 sm:w-3/4 md:w-1/2 lg:w-1/3">
+        {/* Sign In Section */}
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl text-black font-bold mb-4 m-4">Sign In</h2>
+          <span className="text-sm bg-green-200 p-4 rounded-2xl text-black">
+            <Link to="/">Homepage</Link>
+          </span>
+        </div>
+
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium">
+            <label
+              htmlFor="email"
+              className="block text-sm text-black font-medium"
+            >
               Email
             </label>
             <input
@@ -62,7 +75,10 @@ const SignIn = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium">
+            <label
+              htmlFor="password"
+              className="block text-sm text-black font-medium"
+            >
               Password
             </label>
             <input
@@ -74,22 +90,26 @@ const SignIn = () => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
+       
+          <button className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-3 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
             Sign In
           </button>
         </form>
-        <p className="mt-4 text-center">
+        <p className="mt-4 text-black text-center">
           Don't have an account?{" "}
           <Link to="/signup" className="text-blue-400 hover:underline">
             Sign Up
           </Link>
         </p>
-        <button className=" px-4 py-2" onClick={getenvurl}>
-          getenvurl
-        </button>
+      </div>
+
+      {/* Second Section (Image) */}
+      <div className="h-[200px] w-[250px] sm:h-[300px] sm:w-[350px] md:h-[400px] md:w-[500px] lg:h-[400px] lg:w-[500px] ml-8 mt-8 sm:mt-4 sm:ml-0 sm:p-8 sm:block">
+        <img
+          src={loginanimation}
+          alt="animation"
+          className="w-full h-full object-cover rounded-2xl"
+        />
       </div>
     </div>
   );

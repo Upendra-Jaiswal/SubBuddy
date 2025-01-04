@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import Example from "./components/Example";
+
 
 import LandingPage from "./components/LandingPage";
 import SubscriptionsPage from "./components/SubscriptionsPage";
@@ -53,6 +55,9 @@ const App = () => {
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/signup" element={<Signincopy2 />} /> */}
+       
+
           <Route path="/" element={<LandingPage />} />
           <Route path="/subscriptions2" element={<SubscriptionsPage />} />
           <Route path="/homepage" element={<HomePage />} />
@@ -72,7 +77,6 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/payment" element={<PaymentPage />} />
 
-       
           <Route path="/subscriptions/:id" element={<SubscriptionDetails />} />
           <Route path="/user-subscriptions" element={<UserSubscriptions />} />
           <Route path="/subscribe" element={<Subscribe />} />
