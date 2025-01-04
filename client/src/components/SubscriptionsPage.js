@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const SubscriptionsPage = () => {
   const [subscriptions, setSubscriptions] = useState([]);
   const [error, setError] = useState("");
@@ -53,19 +52,15 @@ const SubscriptionsPage = () => {
               </h2>
               <p className="text-gray-700 mb-2">{subscription.description}</p>
               <p className="text-xs text-gray-800 dark:text-gray-500">
-                {subscription.users.length === 0 ? (
+                {subscription.usersSharing.length === 0 ? (
                   <div>No users are sharing this subscription now</div>
                 ) : (
                   <div>
-                    {subscription.users[0].name}{" "}
-                    {/* Display the first user name */}
-                    {subscription.users.length > 1 && (
-                      <>
-                        {" "}
-                        and {subscription.users.length - 1} others are sharing
-                        this.
-                      </>
-                    )}
+                    {subscription.usersSharing.length === 1
+                      ? `Only ${subscription.usersSharing[0].name} is sharing this`
+                      : `${subscription.usersSharing[0].name}  and ${
+                          subscription.usersSharing.length - 1
+                        } others are sharing this.`}
                   </div>
                 )}
               </p>

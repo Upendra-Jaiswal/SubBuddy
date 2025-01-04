@@ -3,7 +3,10 @@ const User = require("../models/userModel");
 
 const subscriptions = async (req, res) => {
   try {
-    const subscription = await Subscription.find();
+    const subscription = await Subscription.find().populate(
+      "usersSharing",
+      "name"
+    );
     return res.send(subscription);
   } catch (e) {
     res.status(500).send({ message: e.message });
@@ -149,9 +152,6 @@ const shareSubscription = async (req, res) => {
 //   }
 // };
 
-
-
-
 const getSharedSubscriptions = async (req, res) => {
   try {
     // Use req.user from the authentication middleware
@@ -174,13 +174,11 @@ const getSharedSubscriptions = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   subscriptions,
   getSubscriptionById,
   subscribeToService,
   getUserSubscriptions,
   shareSubscription,
-  getSharedSubscriptions
+  getSharedSubscriptions,
 };

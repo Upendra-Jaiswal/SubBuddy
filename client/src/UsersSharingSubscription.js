@@ -57,12 +57,12 @@ const UsersSharingSubscription = () => {
           {subscription.usersSharing.map((user) => (
             <li key={user._id} className="mb-4 w-[500px]">
               <div className="flex items-center justify-between p-4 bg-white rounded-lg shadow-md border border-gray-200 hover:bg-gray-50">
-                {/* User Name */}
+             
                 <div className="text-lg font-medium text-gray-800">
                   {user.name}
                 </div>
 
-                {/* Pay and Chat buttons */}
+        
                 <div className="flex space-x-4">
                   <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
                     <Link to="/payment" state={{ amount }}>

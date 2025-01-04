@@ -18,7 +18,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Seemysharedsubs from "./pages/Myprofile/ShareSubs/Seemysharedsub";
 import UsersSharingSubscription from "./UsersSharingSubscription";
 
-import AllSubscriptions from "./subscriptions/AllSubscriptions";
 import SubscriptionDetails from "./subscriptions/SubscriptionDetails";
 import UserSubscriptions from "./subscriptions/UserSubscriptions";
 import Subscribe from "./subscriptions/Subscribe";
@@ -73,7 +72,7 @@ const App = () => {
           <Route path="/chat" element={<Chat />} />
           <Route path="/payment" element={<PaymentPage />} />
 
-          <Route path="/subscriptions" element={<AllSubscriptions />} />
+       
           <Route path="/subscriptions/:id" element={<SubscriptionDetails />} />
           <Route path="/user-subscriptions" element={<UserSubscriptions />} />
           <Route path="/subscribe" element={<Subscribe />} />
