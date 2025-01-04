@@ -41,7 +41,7 @@ const SubscriptionsPage = () => {
             <div className="flex-shrink-0">
               <img
                 className="object-cover w-full h-48 rounded-t-lg"
-                src={subscription.image} // Use a default image if none provided
+                src={subscription.image} 
                 alt={subscription.name}
               />
             </div>
