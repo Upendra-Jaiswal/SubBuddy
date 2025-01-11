@@ -62,7 +62,8 @@ app.post("/order", async (req, res) => {
       merchantTransactionId: merchantTransactionId,
       name: req.body.name,
       amount: req.body.amount * 100,
-      redirectUrl: `http://localhost:8000/status?id=${merchantTransactionId}`,
+      // redirectUrl: `http://localhost:8000/status?id=${merchantTransactionId}`,
+      redirectUrl: `${process.env.BACKEND}/status?id=${merchantTransactionId}`,
       redirectMode: "POST",
       mobileNumber: req.body.phone,
       paymentInstrument: {

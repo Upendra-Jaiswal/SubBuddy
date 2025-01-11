@@ -9,8 +9,12 @@ const Sidebar = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-end items-start z-50 m-7">
-      <div className="bg-gradient-to-r from-teal-400 to-blue-500 w-64 h-[40vh] p-4 shadow-lg relative mb-7">
+    <div className="fixed inset-0 flex justify-end items-start z-50 m-2">
+      {/* <div className="bg-gradient-to-r from-teal-400 to-black-500 w-64 h-[40vh] p-4 shadow-lg relative mb-7"> */}
+
+      {/* <div className="bg-gradient-to-r bg-gray-800 w-64 h-[40vh] p-4 shadow-lg relative mb-7"> */}
+
+      <div className="bg-gradient-to-r bg-gray-800 w-64 h-[200px] p-4 shadow-lg relative mb-7">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-white hover:text-gray-200 focus:outline-none mb-7"
