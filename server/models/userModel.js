@@ -7,6 +7,8 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   sharedSubscriptions: [{ type: Schema.Types.ObjectId, ref: "Subscription" }], // Subscriptions the user is sharing
   subscribedServices: [{ type: Schema.Types.ObjectId, ref: "Subscription" }],
+  paidSubscriptions: [{type:Schema.Types.ObjectId,ref:"Subscription"}],
+
 });
 
 const User = mongoose.model("User", userSchema);

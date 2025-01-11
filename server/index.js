@@ -12,6 +12,8 @@ require("dotenv").config(); // Load environment variables
 const app = express();
 const PORT = process.env.PORT || 3001; // Use environment variable for port or default to 3001
 const helmet = require("helmet");
+const { paidSubscription } = require("./controllers/subscriptionController");
+const PaidSubscription = require("./models/paidSubscription");
 
 let salt_key = "96434309-7796-489d-8924-ab56988a6076";
 let merchant_id = "PGTESTPAYUAT86";
@@ -64,8 +66,13 @@ app.post("/order", async (req, res) => {
       merchantTransactionId: merchantTransactionId,
       name: req.body.name,
       amount: req.body.amount * 100,
+      bookingDetails: req.body.bookingDetails,
       // redirectUrl: `http://localhost:8000/status?id=${merchantTransactionId}`,
-      redirectUrl: `${process.env.BACKEND}/status?id=${merchantTransactionId}`,
+      redirectUrl: `${
+        process.env.BACKEND
+      }/status?id=${merchantTransactionId}&bookingDetails=${encodeURIComponent(
+        JSON.stringify(req.body.bookingDetails)
+      )}`,
       redirectMode: "POST",
       mobileNumber: req.body.phone,
       paymentInstrument: {
@@ -111,8 +118,10 @@ app.post("/order", async (req, res) => {
 });
 
 app.post("/status", async (req, res) => {
-  const merchantTransactionId = req.query.id;
+  //const merchantTransactionId = req.query.id;
   const merchantId = merchant_id;
+
+  const { id: merchantTransactionId, bookingDetails } = req.query;
 
   const keyIndex = 1;
   const string =
@@ -133,10 +142,27 @@ app.post("/status", async (req, res) => {
 
   axios
     .request(options)
-    .then(function (response) {
+    .then(async function (response) {
       if (response.data.success === true) {
         // const url = "http://localhost:5173/success";
         // return res.redirect(url);
+
+        // const newTripBooking = new TripBooking({
+        //   merchantTransactionId,
+        //   name,
+        //   bookingDetails,
+        //   amount,
+        //   status: "confirmed", // Default status as "pending"
+        // });
+
+        const newPaidSubscription = new PaidSubscription({
+          merchantID: merchantTransactionId,
+          bookingDetails,
+        });
+
+        await newPaidSubscription.save();
+
+        console.log(merchantTransactionId, bookingDetails);
 
         return res.redirect(successUrl);
       } else {

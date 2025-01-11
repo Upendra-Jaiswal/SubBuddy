@@ -1,4 +1,5 @@
 const Subscription = require("../models/subscriptionModel");
+const PaidSubscription = require("../models/paidSubscription");
 const User = require("../models/userModel");
 
 const subscriptions = async (req, res) => {
@@ -12,6 +13,25 @@ const subscriptions = async (req, res) => {
     res.status(500).send({ message: e.message });
   }
 };
+
+const paidSubscription = async (req, res) => {
+  try {
+    const paidSubscription = await PaidSubscription.find();
+    return res.send(paidSubscription);
+  } catch (e) {
+    res.status(500).send({ message: e.message });
+  }
+};
+
+// const createPaidSubscription = async(req,res)=>{
+
+//   try{
+
+//   }
+//   catch(e){
+
+//   }
+// }
 
 //Users can click on a specific subscription to view a list of users who are sharing it.
 const getSubscriptionById = async (req, res) => {
@@ -181,4 +201,5 @@ module.exports = {
   getUserSubscriptions,
   shareSubscription,
   getSharedSubscriptions,
+  paidSubscription,
 };

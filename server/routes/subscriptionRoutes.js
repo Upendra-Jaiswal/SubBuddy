@@ -6,6 +6,7 @@ const {
   getUserSubscriptions,
   shareSubscription,
   getSharedSubscriptions,
+  paidSubscription,
 } = require("../controllers/subscriptionController");
 
 const {
@@ -14,10 +15,13 @@ const {
 } = require("../controllers/sharedSubscriptionController");
 
 const authenticateToken = require("../middlewares/authMiddleware");
+const PaidSubscription = require("../models/paidSubscription");
 
 const router = express.Router();
 
 router.get("/subscriptions", subscriptions);
+
+router.get("/paidSubscription", paidSubscription);
 router.post("/sharesub", sharesub);
 router.get("/seemysharedsubs", seemysharedsubs);
 

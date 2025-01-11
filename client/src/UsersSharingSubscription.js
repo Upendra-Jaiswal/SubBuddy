@@ -148,7 +148,17 @@ const UsersSharingSubscription = () => {
                 </div>
                 <div className="flex space-x-4">
                   <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                    <Link to="/payment" state={{ amount }}>
+                    {/* <Link to="/payment" state={{ amount }}> */}
+                    <Link
+                      to="/payment"
+                      state={{
+                        amount,
+                        bookingDetails: {
+                          userID: user._id,
+                          userName: user.name,
+                        },
+                      }}
+                    >
                       Pay{" "}
                     </Link>
                   </button>
