@@ -5,13 +5,13 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Example from "./components/Example";
 
-
 import LandingPage from "./components/LandingPage";
 import SubscriptionsPage from "./components/SubscriptionsPage";
 import HomePage from "./pages/HomePage";
 import MyProfile from "./pages/Myprofile/Myprofile";
 //import Sharesubs from "./pages/Myprofile/ShareSubs/Sharesub";
 import Sharesubs from "./pages/Myprofile/ShareSubs/Sharesub";
+import PaymentSuccessPage from "./PaymentSuccessPage";
 import Users from "./pages/Users/Users";
 import Chat from "./pages/Chat/Chat";
 import UserContext from "./contexts/UserContext";
@@ -56,10 +56,11 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           {/* <Route path="/signup" element={<Signincopy2 />} /> */}
-       
 
           <Route path="/" element={<LandingPage />} />
           <Route path="/subscriptions2" element={<SubscriptionsPage />} />
+          <Route path="/payment-success" element={<PaymentSuccessPage />} />
+
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/myprofile" element={<MyProfile />} />
           {/* <Route path="/sharemysubs" element={<Sharesubs />} /> */}

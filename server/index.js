@@ -53,6 +53,8 @@ app.use("/api", subscriptionRoutes);
 
 app.use("/api", userRoutes);
 
+const successUrl = `${process.env.ORIGIN}/payment-success`;
+
 app.post("/order", async (req, res) => {
   try {
     let merchantTransactionId = req.body.transactionId;
@@ -133,8 +135,10 @@ app.post("/status", async (req, res) => {
     .request(options)
     .then(function (response) {
       if (response.data.success === true) {
-        const url = "http://localhost:5173/success";
-        return res.redirect(url);
+        // const url = "http://localhost:5173/success";
+        // return res.redirect(url);
+
+        return res.redirect(successUrl);
       } else {
         const url = "http://localhost:5173/fail";
         return res.redirect(url);
