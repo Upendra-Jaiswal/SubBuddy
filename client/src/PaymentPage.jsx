@@ -23,6 +23,7 @@ const PaymentPage = () => {
       MUID: "MUID" + Date.now(),
       transactionId: "T" + Date.now(),
       bookingDetails: bookingDetails,
+
     };
 
     console.log(data);

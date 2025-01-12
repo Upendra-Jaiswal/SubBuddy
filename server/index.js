@@ -3,6 +3,7 @@ const connectDB = require("./config/db"); // Import the DB connection function
 const authRoutes = require("./routes/authRoutes");
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
 const userRoutes = require("./routes/userRoutes.js");
+const paymentRoutes = require("./routes/paymentRoutes.js");
 const authenticateToken = require("./middlewares/authMiddleware");
 const crypto = require("crypto");
 const cors = require("cors");
@@ -14,6 +15,9 @@ const PORT = process.env.PORT || 3001; // Use environment variable for port or d
 const helmet = require("helmet");
 const { paidSubscription } = require("./controllers/subscriptionController");
 const PaidSubscription = require("./models/paidSubscription");
+
+const Payment = require("./models/paymentSchema");
+const User = require("./models/userModel");
 
 let salt_key = "96434309-7796-489d-8924-ab56988a6076";
 let merchant_id = "PGTESTPAYUAT86";
@@ -52,7 +56,7 @@ app.use(
 app.use("/api", authRoutes);
 
 app.use("/api", subscriptionRoutes);
-
+app.use("/api", paymentRoutes);
 app.use("/api", userRoutes);
 
 const successUrl = `${process.env.ORIGIN}/payment-success`;
@@ -67,6 +71,7 @@ app.post("/order", async (req, res) => {
       name: req.body.name,
       amount: req.body.amount * 100,
       bookingDetails: req.body.bookingDetails,
+      userID: req.body.bookingDetails.payerUserID,
       // redirectUrl: `http://localhost:8000/status?id=${merchantTransactionId}`,
       redirectUrl: `${
         process.env.BACKEND
@@ -122,6 +127,7 @@ app.post("/status", async (req, res) => {
   const merchantId = merchant_id;
 
   const { id: merchantTransactionId, bookingDetails } = req.query;
+  console.log(req.query);
 
   const keyIndex = 1;
   const string =
@@ -155,14 +161,63 @@ app.post("/status", async (req, res) => {
         //   status: "confirmed", // Default status as "pending"
         // });
 
-        const newPaidSubscription = new PaidSubscription({
-          merchantID: merchantTransactionId,
-          bookingDetails,
+        // const newPaidSubscription = new PaidSubscription({
+        //   userID: bookingDetails.payerUserID,
+        //   merchantID: merchantTransactionId,
+        //   bookingDetails,
+        // });
+
+        //  await newPaidSubscription.save();
+
+        // try{
+        //         const { payerId, receiverId, subscriptionId, amount } = req.body;
+        const bookingDetailsParsed = JSON.parse(bookingDetails);
+
+        //         // Step 1: Create a new payment record
+        const payment = new Payment({
+          payer: bookingDetailsParsed.payerUserID, // ObjectId of the paying user
+          receiver: bookingDetailsParsed.receiverUserID, // ObjectId of the receiving user
+          subscription: bookingDetailsParsed.subscription._id, // ObjectId of the subscription
+          amount: 100, // Amount as a number, not a string
+          status: "Completed", // Payment status
         });
 
-        await newPaidSubscription.save();
+        const savedPayment = await payment.save();
 
-        console.log(merchantTransactionId, bookingDetails);
+        // await payment.save();
+
+        await User.findByIdAndUpdate(bookingDetailsParsed.payerUserID, {
+          $push: { paymentsMade: savedPayment._id },
+        });
+
+        // Step 3: Update the receiver's paymentsReceived array
+        await User.findByIdAndUpdate(bookingDetailsParsed.receiverUserID, {
+          $push: { paymentsReceived: savedPayment._id },
+        });
+
+        console.log(payment, "saved successfully");
+
+        //         const savedPayment = await payment.save();
+
+        //         // Step 2: Update the payer's paymentsMade array
+        //         await User.findByIdAndUpdate(payerId, {
+        //           $push: { paymentsMade: savedPayment._id },
+        //         });
+
+        //         // Step 3: Update the receiver's paymentsReceived array
+        //         await User.findByIdAndUpdate(receiverId, {
+        //           $push: { paymentsReceived: savedPayment._id },
+        //         });
+
+        //         res.status(201).json({
+        //           message: 'Payment recorded successfully!',
+        //           payment: savedPayment,
+        //         });
+        //       } catch (error) {
+        //         res.status(500).json({ message: 'Error processing payment!', error });
+        //       }
+
+        //  console.log(merchantTransactionId, bookingDetails);
 
         return res.redirect(successUrl);
       } else {

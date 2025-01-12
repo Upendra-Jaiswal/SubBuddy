@@ -92,6 +92,7 @@ const UsersSharingSubscription = () => {
   const [subscription, setSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [payerUserID, setPayerUserID] = useState("");
   const navigate = useNavigate(); // Hook for navigation
 
   const amount = 1000;
@@ -111,6 +112,8 @@ const UsersSharingSubscription = () => {
         );
         setSubscription(response.data);
         setLoading(false);
+        // const payerUserID = localStorage.getItem("userID");
+        setPayerUserID(localStorage.getItem("userID"));
       } catch (err) {
         setLoading(false);
         setError("Failed to fetch subscription details.");
@@ -154,8 +157,11 @@ const UsersSharingSubscription = () => {
                       state={{
                         amount,
                         bookingDetails: {
-                          userID: user._id,
-                          userName: user.name,
+                          // userID: user._id,
+                          // userName: user.name,
+                          receiverUserID: user._id,
+                          payerUserID,
+                          subscription,
                         },
                       }}
                     >

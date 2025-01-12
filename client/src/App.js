@@ -4,6 +4,8 @@ import axios from "axios";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Example from "./components/Example";
+import PaymentDetails from "./pages/Myprofile/ShareSubs/PaymentDetails";
+import BoughtSubscriptions from "./pages/Myprofile/ShareSubs/BoughtSubscriptions";
 
 import LandingPage from "./components/LandingPage";
 import SubscriptionsPage from "./components/SubscriptionsPage";
@@ -63,10 +65,15 @@ const App = () => {
 
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/myprofile" element={<MyProfile />} />
+          <Route path="/paymentDetails" element={<PaymentDetails />} />
           {/* <Route path="/sharemysubs" element={<Sharesubs />} /> */}
           <Route path="/sharemysubs" element={<ShareSubscription />} />
           {/* <Route path="/seemysharedsubs" element={<Seemysharedsubs />} /> */}
           <Route path="/seemysharedsubs" element={<SharedSubscriptionPage />} />
+          <Route path="/boughtSubscriptions" element={<BoughtSubscriptions />} />
+
+
+          
 
           <Route path="/users" element={<Users />} />
           <Route path="/chat" element={<Chat />} />

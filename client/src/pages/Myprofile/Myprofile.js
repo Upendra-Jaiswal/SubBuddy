@@ -39,6 +39,14 @@ const MyProfile = () => {
                 View Shared Subscriptions
               </Link>
             </div>
+            <div>
+              <Link
+                to="/boughtSubscriptions"
+                className="text-blue-500 hover:underline"
+              >
+                View Bought Subscriptions
+              </Link>
+            </div>
           </div>
         </div>
 
