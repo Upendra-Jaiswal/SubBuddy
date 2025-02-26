@@ -3,15 +3,7 @@ import React from "react";
 const LandingPage = () => {
   return (
     <div>
-      {/* Caution Banner */}
-      <section className="bg-yellow-800 text-yellow-200 py-4">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-lg font-semibold">
-            ⚠️ Caution: This app is currently in progress. Some features may be
-            incomplete or not fully functional.
-          </p>
-        </div>
-      </section>
+    
 
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white">
